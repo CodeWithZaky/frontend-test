@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const loginDataExample = { username: "user123", password: "123123" };
+const LOGIN_DATA_EXAMPLE = { username: "user123", password: "123123" };
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -17,8 +17,8 @@ export default function Login() {
     }
 
     if (
-      username !== loginDataExample.username ||
-      password !== loginDataExample.password
+      username !== LOGIN_DATA_EXAMPLE.username ||
+      password !== LOGIN_DATA_EXAMPLE.password
     ) {
       setErrorMessage("Username or password is incorrect");
       setIsLoading(false);
