@@ -6,6 +6,7 @@ type AuthContextType = {
     password?: string;
   };
   status: string;
+  setUser: (userData: { username?: string; password?: string }) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -13,6 +14,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 const initialAuthState: AuthContextType = {
   user: {},
   status: "unauthenticated",
+  setUser: () => {},
 };
 
 export default function AuthProvider({
@@ -21,6 +23,16 @@ export default function AuthProvider({
   children: React.ReactNode;
 }) {
   const [authState, setAuthState] = useState(initialAuthState);
+
+  const setUser = (userData: { username?: string; password?: string }) => {
+    setAuthState((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        ...userData,
+      },
+    }));
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -32,13 +44,22 @@ export default function AuthProvider({
           password: userData.password,
         },
         status: "authenticated",
+        setUser: setUser,
       });
     } else {
-      setAuthState(initialAuthState);
+      setAuthState({
+        ...initialAuthState,
+        setUser: setUser,
+      });
     }
   }, []);
 
+  const contextValue: AuthContextType = {
+    ...authState,
+    setUser: setUser,
+  };
+
   return (
-    <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
