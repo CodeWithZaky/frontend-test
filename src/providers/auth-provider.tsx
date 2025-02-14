@@ -13,7 +13,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 const initialAuthState: AuthContextType = {
   user: {},
-  status: "unauthenticated",
+  status: "",
   setUser: () => {},
 };
 
@@ -49,6 +49,7 @@ export default function AuthProvider({
     } else {
       setAuthState({
         ...initialAuthState,
+        status: "unauthenticated",
         setUser: setUser,
       });
     }
