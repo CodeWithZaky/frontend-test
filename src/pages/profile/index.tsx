@@ -1,4 +1,6 @@
+import useSession from "@/hooks/useSession";
 import { AuthContext } from "@/providers/auth-provider";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
 function Profile() {
@@ -7,6 +9,14 @@ function Profile() {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const authContext = useContext(AuthContext);
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session?.status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, []);
 
   if (!authContext) {
     return <div>AuthContext is null</div>;
