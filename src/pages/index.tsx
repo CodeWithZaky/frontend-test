@@ -15,6 +15,13 @@ export default function Home() {
           <ThemeSwitcher />
         </div>
         <Sparator />
+        <div>
+          <p>Go To CRUD item</p>
+          <Link href="/crud" className="bg-gray-600 px-4 py-1 text-center">
+            CRUD
+          </Link>
+        </div>
+        <Sparator />
         <div className="space-y-1">
           <p className="font-bold">User Data</p>
 
