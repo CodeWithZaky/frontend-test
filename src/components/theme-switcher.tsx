@@ -9,7 +9,7 @@ export default function ThemeSwitcher() {
         className={`px-3 py-1  ${
           theme === "light"
             ? "bg-slate-900 text-white"
-            : "bg-gray-200 dark:bg-gray-700 dark:text-white"
+            : "bg-gray-200 dark:bg-gray-700 text-stone-900 dark:text-stone-100"
         }`}
         onClick={() => toggleTheme("light")}
       >
@@ -19,7 +19,7 @@ export default function ThemeSwitcher() {
         className={`px-3 py-1  ${
           theme === "dark"
             ? "bg-slate-900 text-white"
-            : "bg-gray-200 dark:bg-gray-700 dark:text-white"
+            : "bg-gray-200 dark:bg-gray-700 text-stone-900 dark:text-stone-100"
         }`}
         onClick={() => toggleTheme("dark")}
       >
@@ -29,7 +29,7 @@ export default function ThemeSwitcher() {
         className={`px-3 py-1  ${
           theme === "system"
             ? "bg-slate-900 text-white"
-            : "bg-gray-200 dark:bg-gray-700 dark:text-white"
+            : "bg-gray-200 dark:bg-gray-700 text-stone-900 dark:text-stone-100"
         }`}
         onClick={() => toggleTheme("system")}
       >

@@ -1,8 +1,8 @@
+import ItemForm from "@/components/item-form";
 import ItemList from "@/components/item-list";
 import Pagination from "@/components/pagination";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import useSession from "@/hooks/useSession";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ interface Item {
   description: string;
 }
 
-export default function Crud() {
+export default function Home() {
   const [items, setItems] = useLocalStorage<Item[]>("items", []);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +20,7 @@ export default function Crud() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const session = useSession();
-  console.log(session);
+
   useEffect(() => {
     if (session?.status === "unauthenticated") {
       router.push("/login");
@@ -34,7 +34,7 @@ export default function Crud() {
     if (search) setSearchTerm(search);
   }, [searchParams]);
 
-  const filteredItems = items.filter((item) =>
+  const filteredItems = items.filter((item: Item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -61,24 +61,45 @@ export default function Crud() {
     router.push(`?${params.toString()}`);
   };
 
+  const addItem = (item: Item) => {
+    setItems([...items, item]);
+  };
+
+  const updateItem = (updatedItem: Item) => {
+    setItems(
+      items.map((item: Item) =>
+        item.id === updatedItem.id ? updatedItem : item
+      )
+    );
+  };
+
   const deleteItem = (id: string) => {
-    setItems(items.filter((item) => item.id !== id));
+    setItems(items.filter((item: Item) => item.id !== id));
   };
 
   return (
     <div className="mx-auto p-4 container">
-      <h1 className="mb-4 font-bold text-2xl">CRUD App with Local Storage</h1>
-      <div className="mb-4">
+      <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-100 text-2xl">
+        CRUD App with Local Storage
+      </h1>
+      <div className="mb-10">
         <input
           type="text"
           placeholder="Search items..."
           value={searchTerm}
           onChange={handleSearch}
-          className="p-2 border rounded w-full"
+          className="bg-stone-900 dark:bg-stone-900 p-2 border rounded w-full text-stone-900 dark:text-stone-100"
         />
       </div>
-      <Link href="/crud/add">Add Item</Link>
-      <ItemList items={currentItems} onDelete={deleteItem} />
+      <p className="font-bold text-stone-900 dark:text-stone-100 text-xl">
+        Add Item
+      </p>
+      <ItemForm onSubmit={addItem} />
+      <ItemList
+        items={currentItems}
+        onUpdate={updateItem}
+        onDelete={deleteItem}
+      />
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={filteredItems.length}

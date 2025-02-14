@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <div className="relative">
       <div className="flex justify-between items-center border-stone-700 border-b h-[50px]">
-        <Link href="/" className="ml-5">
+        <Link href="/" className="ml-5 text-stone-900 dark:text-stone-100">
           Home
         </Link>
         <div>
@@ -42,7 +42,7 @@ const DropdownMenu = () => {
       {session?.status === "authenticated" && (
         <div>
           <span
-            className="hover:bg-stone-600 mr-5 px-4 py-1 border border-gray-600 rounded-md text-center cursor-pointer"
+            className="hover:bg-stone-600 mr-5 px-4 py-1 border border-gray-600 rounded-md text-stone-900 dark:text-stone-100 text-center cursor-pointer"
             onClick={() => setIsOpenDropdown(!isOpenDropdown)}
           >
             {session.user?.username}

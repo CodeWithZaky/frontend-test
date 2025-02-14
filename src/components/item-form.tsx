@@ -38,14 +38,14 @@ export default function ItemForm({ initialData, onSubmit }: ItemFormProps) {
         onChange={(e) => setName(e.target.value)}
         placeholder="Item name"
         required
-        className="mb-2 p-2 border rounded w-full"
+        className="bg-stone-900 dark:bg-stone-900 mb-2 p-2 border rounded w-full"
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Item description"
         required
-        className="mb-2 p-2 border rounded w-full"
+        className="bg-stone-900 dark:bg-stone-900 mb-2 p-2 border rounded w-full"
       />
       <button
         type="submit"

@@ -35,9 +35,11 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center py-20 border min-h-72">
+    <div className="flex justify-center items-center py-20 min-h-72">
       <div className="flex flex-col gap-5">
-        <p className="text-2xl fonst-semibold">Login</p>
+        <p className="text-stone-900 dark:text-stone-100 text-2xl fonst-semibold">
+          Login
+        </p>
         <form className="flex flex-col gap-5" action={handleLogin}>
           <div className="flex flex-col gap-1">
             <Label htmlFor="username">Username</Label>
@@ -58,6 +60,9 @@ export default function Login() {
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+        <p className="text-stone-900 dark:text-stone-100">
+          {`example { username: user123, password: 123123 }`}
+        </p>
       </div>
     </div>
   );
@@ -69,7 +74,7 @@ const Input = ({ name, id }: { name: string; id: string }) => {
       name={name}
       type={name}
       id={id}
-      className="bg-stone-500/50 px-3 rounded-md w-fit"
+      className="bg-stone-500/50 px-3 rounded-md w-fit text-stone-900 dark:text-stone-100"
     />
   );
 };
@@ -82,7 +87,7 @@ const Label = ({
   htmlFor: string;
 }) => {
   return (
-    <label htmlFor={htmlFor} className="text-stone-300">
+    <label htmlFor={htmlFor} className="text-stone-900 dark:text-stone-100">
       {children}
     </label>
   );
