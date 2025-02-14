@@ -16,18 +16,20 @@ function Profile() {
     if (session?.status === "unauthenticated") {
       router.push("/login");
     }
-  }, []);
+  }, [router, session?.status]);
+
+  useEffect(() => {
+    if (authContext) {
+      setNewUsername(authContext.user?.username || "");
+      setNewPassword(authContext.user?.password || "");
+    }
+  }, [authContext?.user]);
 
   if (!authContext) {
     return <div>AuthContext is null</div>;
   }
 
-  const { user, setUser } = authContext;
-
-  useEffect(() => {
-    setNewUsername(user?.username || "");
-    setNewPassword(user?.password || "");
-  }, [user]);
+  const { setUser } = authContext;
 
   const handleUsernameSave = () => {
     const userData = JSON.parse(localStorage.getItem("user") || "{}");

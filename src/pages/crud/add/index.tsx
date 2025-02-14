@@ -15,13 +15,12 @@ function AddItem() {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
-  const params = new URLSearchParams();
-
   useEffect(() => {
+    const params = new URLSearchParams();
     if (name) params.set("name", name || "");
     if (description) params.set("description", description || "");
     router.push(`?${params.toString()}`);
-  }, [name, description]);
+  }, [name, description, router]);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !description) {

@@ -25,7 +25,7 @@ export default function Crud() {
     if (session?.status === "unauthenticated") {
       router.push("/login");
     }
-  }, []);
+  }, [router, session?.status]);
 
   useEffect(() => {
     const page = searchParams.get("page");
@@ -59,16 +59,6 @@ export default function Crud() {
     params.set("page", page.toString());
     if (search) params.set("search", search);
     router.push(`?${params.toString()}`);
-  };
-
-  const updateItem = (updatedItem: {
-    id: string;
-    name: string;
-    description: string;
-  }) => {
-    setItems(
-      items.map((item) => (item.id === updatedItem.id ? updatedItem : item))
-    );
   };
 
   const deleteItem = (id: string) => {
