@@ -27,7 +27,7 @@ export default function Pagination({
               className={`px-3 py-1 rounded  ${
                 currentPage === number
                   ? "bg-blue-500 text-stone-100 dark:text-stone-100"
-                  : "bg-gray-200 text-stone-900 dark:text-stone-100"
+                  : "bg-gray-200 text-stone-900"
               }`}
             >
               {number}
