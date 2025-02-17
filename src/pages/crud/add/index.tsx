@@ -59,7 +59,7 @@ const AddItemPage = () => {
 
   return (
     <div className="mx-auto p-4 container">
-      <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-900 text-2xl">
+      <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-100 text-2xl">
         Add Item
       </h1>
       <form onSubmit={AddItem} className="mb-4">

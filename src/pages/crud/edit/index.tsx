@@ -66,7 +66,9 @@ const EditItemPage = () => {
 
   return (
     <div className="mx-auto p-4 container">
-      <h1 className="mb-4 font-bold text-2xl">Edit Item</h1>
+      <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-100 text-2xl">
+        Edit Item
+      </h1>
       <form onSubmit={updateItem} className="mb-4">
         <input
           type="text"
