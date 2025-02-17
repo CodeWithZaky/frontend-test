@@ -55,7 +55,7 @@ export default function Login() {
           <button
             name="submit"
             disabled={isLoading}
-            className="bg-stone-500/50 px-4 py-1 rounded-md w-fit"
+            className="bg-stone-500/50 px-4 py-1 rounded w-fit"
           >
             {isLoading ? "Loading..." : "Login"}
           </button>
@@ -74,7 +74,7 @@ const Input = ({ name, id }: { name: string; id: string }) => {
       name={name}
       type={name}
       id={id}
-      className="bg-stone-500/50 px-3 rounded-md w-fit text-stone-900 dark:text-stone-100"
+      className="bg-stone-500/50 px-3 rounded w-fit text-stone-900 dark:text-stone-100"
     />
   );
 };

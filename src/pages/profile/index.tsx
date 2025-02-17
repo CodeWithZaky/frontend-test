@@ -1,6 +1,5 @@
-import useSession from "@/hooks/useSession";
 import { AuthContext } from "@/providers/auth-provider";
-import { useRouter } from "next/router";
+import { withAuth } from "@/providers/middleware";
 import { useContext, useEffect, useState } from "react";
 
 function Profile() {
@@ -9,14 +8,6 @@ function Profile() {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const authContext = useContext(AuthContext);
-  const session = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (session?.status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [router, session?.status]);
 
   useEffect(() => {
     if (authContext) {
@@ -48,13 +39,13 @@ function Profile() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center py-20 rounded-lg w-full min-h-72">
+    <div className="flex flex-col justify-center items-center py-20 rounded w-full min-h-72">
       <h2 className="mb-6 font-semibold text-stone-900 dark:text-stone-100 text-2xl">
         Profil Anda
       </h2>
       <div className="space-y-4 px-4 w-full max-w-md">
         {/* Username */}
-        <div className="flex justify-between items-center bg-zinc-200 dark:bg-zinc-800 shadow-sm p-4 rounded-md">
+        <div className="flex justify-between items-center bg-zinc-200 dark:bg-zinc-800 shadow-sm p-4 rounded">
           <div className="flex flex-col gap-2">
             <Label>Username:</Label>
             <Input
@@ -89,7 +80,7 @@ function Profile() {
         </div>
 
         {/* Password */}
-        <div className="flex justify-between items-center bg-zinc-200 dark:bg-zinc-800 shadow-sm p-4 rounded-md">
+        <div className="flex justify-between items-center bg-zinc-200 dark:bg-zinc-800 shadow-sm p-4 rounded">
           <div className="flex flex-col gap-2">
             <Label>Password:</Label>
             <Input
@@ -107,7 +98,7 @@ function Profile() {
                 Save
               </button>
               <button
-                className="bg-red-500 hover:bg-red-700 px-2"
+                className="bg-red-500 hover:bg-red-700 px-2 rounded"
                 onClick={() => setIsEditPassword(false)}
               >
                 Cancel
@@ -115,7 +106,7 @@ function Profile() {
             </div>
           ) : (
             <button
-              className="text-blue-500 hover:text-blue-700"
+              className="rounded text-blue-500 hover:text-blue-700"
               onClick={() => setIsEditPassword(true)}
             >
               Edit
@@ -127,7 +118,7 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default withAuth(Profile);
 
 const Input = ({
   onChange,
@@ -140,7 +131,7 @@ const Input = ({
 }) => {
   return (
     <input
-      className="bg-zinc-700 disabled:bg-transparent px-3 disabled:px-0 rounded-sm ring-1 ring-zinc-500 disabled:ring-0 text-stone-500 dark:text-stone-100 transition-all"
+      className="bg-stone-300 disabled:bg-transparent dark:disabled:bg-transparent dark:bg-stone-700 px-3 disabled:px-0 rounded ring-1 ring-zinc-500 disabled:ring-0 text-stone-500 dark:text-stone-100 transition-all"
       onChange={onChange}
       disabled={disabled}
       value={value}

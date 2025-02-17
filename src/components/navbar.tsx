@@ -42,13 +42,13 @@ const DropdownMenu = () => {
       {session?.status === "authenticated" && (
         <div>
           <span
-            className="hover:bg-stone-600 mr-5 px-4 py-1 border border-gray-600 rounded-md text-stone-900 dark:text-stone-100 text-center cursor-pointer"
+            className="hover:bg-stone-600 mr-5 px-4 py-1 border border-gray-600 rounded text-stone-900 hover:text-stone-100 dark:text-stone-100 text-center cursor-pointer"
             onClick={() => setIsOpenDropdown(!isOpenDropdown)}
           >
             {session.user?.username}
           </span>
           {isOpenDropdown && (
-            <div className="right-0 z-10 absolute bg-stone-900 mt-2 border border-stone-700 rounded-md w-48">
+            <div className="right-0 z-10 absolute bg-stone-900 mt-2 border border-stone-700 rounded w-48">
               <Link
                 href="/profile"
                 className="block hover:bg-stone-600 px-4 py-2 text-gray-200 text-sm"

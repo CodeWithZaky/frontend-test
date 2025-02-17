@@ -1,7 +1,7 @@
 import ItemList from "@/components/item-list";
 import Pagination from "@/components/pagination";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import useSession from "@/hooks/useSession";
+import { withAuth } from "@/providers/middleware";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,20 +12,13 @@ export interface Item {
   description: string;
 }
 
-export default function Home() {
+const Crud = () => {
   const [items, setItems] = useLocalStorage<Item[]>("items", []);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 3;
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const session = useSession();
-
-  useEffect(() => {
-    if (session?.status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [router, session?.status]);
+  const router = useRouter();
 
   useEffect(() => {
     const page = searchParams.get("page");
@@ -83,7 +76,7 @@ export default function Home() {
       </div>
       <Link
         href="/crud/add"
-        className="bg-green-500 px-4 py-1 rounded-md w-fit font-bold text-stone-900 dark:text-stone-100 text-xl"
+        className="bg-green-500 px-4 py-1 rounded w-fit font-bold text-stone-900 dark:text-stone-100 text-xl"
       >
         Add Item
       </Link>
@@ -96,4 +89,6 @@ export default function Home() {
       />
     </div>
   );
-}
+};
+
+export default withAuth(Crud);

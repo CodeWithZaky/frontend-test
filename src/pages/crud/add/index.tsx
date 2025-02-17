@@ -1,4 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { withAuth } from "@/providers/middleware";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,7 @@ interface Item {
   description: string;
 }
 
-export default function AddItemPage() {
+const AddItemPage = () => {
   const [items, setItems] = useLocalStorage<Item[]>("items", []);
   const router = useRouter();
   const queryParams = router.query;
@@ -32,7 +33,6 @@ export default function AddItemPage() {
     router.push("/crud");
   };
 
-  // Fungsi untuk memperbarui URL saat state berubah
   const updateQueryString = (name: string, description: string) => {
     const currentParams = new URLSearchParams();
     if (name) currentParams.set("name", name);
@@ -59,7 +59,9 @@ export default function AddItemPage() {
 
   return (
     <div className="mx-auto p-4 container">
-      <h1 className="mb-4 font-bold text-2xl">Add Item</h1>
+      <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-900 text-2xl">
+        Add Item
+      </h1>
       <form onSubmit={AddItem} className="mb-4">
         <input
           type="text"
@@ -94,4 +96,6 @@ export default function AddItemPage() {
       </form>
     </div>
   );
-}
+};
+
+export default withAuth(AddItemPage);

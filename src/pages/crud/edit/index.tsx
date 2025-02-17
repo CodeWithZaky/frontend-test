@@ -1,4 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { withAuth } from "@/providers/middleware";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,7 @@ interface Item {
   description: string;
 }
 
-export default function EditItemPage() {
+const EditItemPage = () => {
   const [items, setItems] = useLocalStorage<Item[]>("items", []);
 
   const router = useRouter();
@@ -100,4 +101,6 @@ export default function EditItemPage() {
       </form>
     </div>
   );
-}
+};
+
+export default withAuth(EditItemPage);
