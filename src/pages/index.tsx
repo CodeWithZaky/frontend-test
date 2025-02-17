@@ -12,7 +12,6 @@ export default function Home() {
           HOME PAGE
         </h1>
 
-        {/* Card for Theme Switcher */}
         <div className="bg-stone-100 dark:bg-stone-800 shadow-md p-5 rounded-lg">
           <p className="font-bold text-stone-900 dark:text-stone-100">
             Change Theme
@@ -20,7 +19,6 @@ export default function Home() {
           <ThemeSwitcher />
         </div>
 
-        {/* Card for CRUD Link */}
         <div className="bg-stone-100 dark:bg-stone-800 shadow-md p-5 rounded-lg">
           <p className="text-stone-900 dark:text-stone-100">Go To CRUD item</p>
           <Link
@@ -31,7 +29,6 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Card for User Data */}
         <div className="bg-stone-100 dark:bg-stone-800 shadow-md p-5 rounded-lg">
           <p className="font-bold text-stone-900 dark:text-stone-100">
             User Data
@@ -71,5 +68,3 @@ export default function Home() {
     </div>
   );
 }
-
-const Sparator = () => <div className="bg-stone-700 w-full h-px" />;
