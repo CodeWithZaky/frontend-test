@@ -33,7 +33,9 @@ const Crud = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredItems
+    .reverse()
+    .slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
