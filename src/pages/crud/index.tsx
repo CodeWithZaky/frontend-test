@@ -1,12 +1,12 @@
-import ItemForm from "@/components/item-form";
 import ItemList from "@/components/item-list";
 import Pagination from "@/components/pagination";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import useSession from "@/hooks/useSession";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface Item {
+export interface Item {
   id: string;
   name: string;
   description: string;
@@ -42,6 +42,8 @@ export default function Home() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
+  console.log(currentItems);
+
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     updateQueryString(pageNumber, searchTerm);
@@ -61,28 +63,16 @@ export default function Home() {
     router.push(`?${params.toString()}`);
   };
 
-  const addItem = (item: Item) => {
-    setItems([...items, item]);
-  };
-
-  const updateItem = (updatedItem: Item) => {
-    setItems(
-      items.map((item: Item) =>
-        item.id === updatedItem.id ? updatedItem : item
-      )
-    );
-  };
-
   const deleteItem = (id: string) => {
     setItems(items.filter((item: Item) => item.id !== id));
   };
 
   return (
-    <div className="mx-auto p-4 container">
+    <div className="flex flex-col gap-5 mx-auto p-4 container">
       <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-100 text-2xl">
         CRUD App with Local Storage
       </h1>
-      <div className="mb-10">
+      <div>
         <input
           type="text"
           placeholder="Search items..."
@@ -91,15 +81,13 @@ export default function Home() {
           className="bg-stone-900 dark:bg-stone-900 p-2 border rounded w-full text-stone-900 dark:text-stone-100"
         />
       </div>
-      <p className="font-bold text-stone-900 dark:text-stone-100 text-xl">
+      <Link
+        href="/crud/add"
+        className="bg-green-500 px-4 py-1 rounded-md w-fit font-bold text-stone-900 dark:text-stone-100 text-xl"
+      >
         Add Item
-      </p>
-      <ItemForm onSubmit={addItem} />
-      <ItemList
-        items={currentItems}
-        onUpdate={updateItem}
-        onDelete={deleteItem}
-      />
+      </Link>
+      <ItemList currentItems={currentItems} deleteItem={deleteItem} />
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={filteredItems.length}
