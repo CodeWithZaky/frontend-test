@@ -35,8 +35,6 @@ const Crud = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
-  console.log(currentItems);
-
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     updateQueryString(pageNumber, searchTerm);
@@ -61,25 +59,25 @@ const Crud = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 mx-auto p-4 container">
+    <div className="flex flex-col gap-5 mx-auto p-4 max-w-4xl container">
       <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-100 text-2xl">
         CRUD App with Local Storage
       </h1>
-      <div>
+      <div className="flex flex-col gap-4">
         <input
           type="text"
           placeholder="Search items..."
           value={searchTerm}
           onChange={handleSearch}
-          className="bg-stone-900 dark:bg-stone-900 p-2 border rounded w-full text-stone-900 dark:text-stone-100"
+          className="bg-stone-100 dark:bg-stone-700 p-2 border border-stone-300 dark:border-stone-600 rounded focus:outline-none focus:ring-2 focus:ring-stone-500 w-full text-stone-900 dark:text-stone-100"
         />
+        <Link
+          href="/crud/add"
+          className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded w-fit font-bold text-stone-100 text-lg transition-colors duration-200"
+        >
+          Add Item
+        </Link>
       </div>
-      <Link
-        href="/crud/add"
-        className="bg-green-500 px-4 py-1 rounded w-fit font-bold text-stone-900 dark:text-stone-100 text-xl"
-      >
-        Add Item
-      </Link>
       <ItemList currentItems={currentItems} deleteItem={deleteItem} />
       <Pagination
         itemsPerPage={itemsPerPage}

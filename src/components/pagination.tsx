@@ -18,21 +18,20 @@ export default function Pagination({
   }
 
   return (
-    <div>
-      <div className="flex justify-center space-x-2">
+    <div className="flex justify-center mt-6">
+      <div className="flex gap-2">
         {pageNumbers.map((number) => (
-          <div key={number}>
-            <button
-              onClick={() => paginate(number)}
-              className={`px-3 py-1 rounded  ${
-                currentPage === number
-                  ? "bg-blue-500 text-stone-100 dark:text-stone-100"
-                  : "bg-gray-200 text-stone-900"
-              }`}
-            >
-              {number}
-            </button>
-          </div>
+          <button
+            key={number}
+            onClick={() => paginate(number)}
+            className={`px-4 py-2 rounded transition-colors duration-200 ${
+              currentPage === number
+                ? "bg-blue-500 text-stone-100"
+                : "bg-stone-200 dark:bg-stone-600 text-stone-900 dark:text-stone-100 hover:bg-stone-300 dark:hover:bg-stone-500"
+            }`}
+          >
+            {number}
+          </button>
         ))}
       </div>
     </div>

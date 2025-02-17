@@ -11,22 +11,28 @@ export default function Home() {
         <h1 className="mx-auto text-stone-900 dark:text-stone-100 text-3xl">
           HOME PAGE
         </h1>
-        <Sparator />
-        <div className="space-y-1">
+
+        {/* Card for Theme Switcher */}
+        <div className="bg-stone-100 dark:bg-stone-800 shadow-md p-5 rounded-lg">
           <p className="font-bold text-stone-900 dark:text-stone-100">
             Change Theme
           </p>
           <ThemeSwitcher />
         </div>
-        <Sparator />
-        <div>
+
+        {/* Card for CRUD Link */}
+        <div className="bg-stone-100 dark:bg-stone-800 shadow-md p-5 rounded-lg">
           <p className="text-stone-900 dark:text-stone-100">Go To CRUD item</p>
-          <Link href="/crud" className="bg-gray-600 px-4 py-1 text-center">
+          <Link
+            href="/crud"
+            className="bg-gray-600 px-4 py-1 rounded text-stone-100 dark:text-stone-100 text-center"
+          >
             CRUD
           </Link>
         </div>
-        <Sparator />
-        <div className="space-y-1">
+
+        {/* Card for User Data */}
+        <div className="bg-stone-100 dark:bg-stone-800 shadow-md p-5 rounded-lg">
           <p className="font-bold text-stone-900 dark:text-stone-100">
             User Data
           </p>
@@ -38,7 +44,7 @@ export default function Home() {
                 <p className="text-stone-900 dark:text-stone-100">Login now</p>
                 <Link
                   href="/login"
-                  className="bg-gray-600 px-4 py-1 text-stone-100 dark:text-stone-100 text-center"
+                  className="bg-gray-600 px-4 py-1 rounded text-stone-100 dark:text-stone-100 text-center"
                 >
                   Login
                 </Link>

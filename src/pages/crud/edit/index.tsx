@@ -65,42 +65,63 @@ const EditItemPage = () => {
   };
 
   return (
-    <div className="mx-auto p-4 container">
-      <h1 className="mb-4 font-bold text-stone-900 dark:text-stone-100 text-2xl">
+    <div className="mx-auto p-4 max-w-4xl container">
+      <h1 className="mb-6 font-bold text-stone-900 dark:text-stone-100 text-2xl">
         Edit Item
       </h1>
-      <form onSubmit={updateItem} className="mb-4">
-        <input
-          type="text"
-          value={name}
-          onChange={handleNameChange}
-          placeholder="Item name"
-          required
-          className="bg-stone-900 mb-2 p-2 border rounded w-full"
-        />
-        <textarea
-          value={description}
-          onChange={handleDescriptionChange}
-          placeholder="Item description"
-          required
-          className="bg-stone-900 mb-2 p-2 border rounded w-full"
-        />
-        <div className="flex justify-between">
-          <button
-            type="submit"
-            className="bg-green-500 px-4 py-2 rounded text-white"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            onClick={() => router.push("/crud")}
-            className="bg-gray-500 px-4 py-2 rounded text-white"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+      <div className="bg-stone-100 dark:bg-stone-700 shadow-md p-6 rounded-lg">
+        <form onSubmit={updateItem} className="space-y-4">
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="name"
+              className="font-medium text-stone-900 dark:text-stone-100"
+            >
+              Item Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={handleNameChange}
+              placeholder="Enter item name"
+              required
+              className="bg-stone-200 dark:bg-stone-600 p-2 border border-stone-300 dark:border-stone-500 rounded focus:outline-none focus:ring-2 focus:ring-stone-500 w-full text-stone-900 dark:text-stone-100"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="description"
+              className="font-medium text-stone-900 dark:text-stone-100"
+            >
+              Item Description
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={handleDescriptionChange}
+              placeholder="Enter item description"
+              required
+              className="bg-stone-200 dark:bg-stone-600 p-2 border border-stone-300 dark:border-stone-500 rounded focus:outline-none focus:ring-2 focus:ring-stone-500 w-full text-stone-900 dark:text-stone-100"
+              rows={4}
+            />
+          </div>
+          <div className="flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={() => router.push("/crud")}
+              className="bg-gray-500 hover:bg-gray-600 px-4 py-2 rounded text-stone-100 transition-colors duration-200"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-stone-100 transition-colors duration-200"
+            >
+              Update Item
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
