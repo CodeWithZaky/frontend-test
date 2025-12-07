@@ -37,6 +37,8 @@ const Crud = () => {
     .reverse()
     .slice(indexOfFirstItem, indexOfLastItem);
 
+  console.log({ indexOfFirstItem, indexOfLastItem, currentItems });
+
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     updateQueryString(pageNumber, searchTerm);
